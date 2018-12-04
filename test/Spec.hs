@@ -1,6 +1,6 @@
 import Data.Maybe
 import Test.HUnit
-import Lib
+import NextFromDigits
 
 caseList = [
   (100100, Just 101000),

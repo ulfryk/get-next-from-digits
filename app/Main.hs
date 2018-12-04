@@ -1,6 +1,6 @@
 module Main where
 
-import Lib
+import NextFromDigits
 import Text.Read
 
 main :: IO ()

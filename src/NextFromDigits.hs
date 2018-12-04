@@ -1,9 +1,9 @@
-module Lib
+module NextFromDigits
     ( getNextFromDigits
     ) where
 
 import Data.Maybe
-import Digits
+import NextFromDigits.Digits
 
 toDigit :: Char -> Int
 toDigit d = read [d]

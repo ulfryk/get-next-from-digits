@@ -1,4 +1,4 @@
-module Digits
+module NextFromDigits.Digits
   ( Digits (Empty, Pending, Updated)
   , processD
   ) where
