@@ -1,6 +1,6 @@
 module NextFromDigits.Digits
-  ( Digits
-  , nextIntDigits
+  ( digits
+  , next
   , toNum
   ) where
 
@@ -19,18 +19,18 @@ processD (Pending (k:ks)) n
   | k > n = Updated (k:n:ks)
   | otherwise = Pending (n:k:ks)
  
-getDigits :: Int -> [Int]
-getDigits = map (\d -> read [d]) . show
+digits :: Int -> Digits
+digits = toDigits . toInts
+  where
+    toInts = map (\d -> read [d]) . show
+    toDigits [] = Empty
+    toDigits ds = Updated ds
  
-getNewDigits :: [Int] -> Digits
-getNewDigits [] = Empty
-getNewDigits (d:[]) = Pending [d]
-getNewDigits ds = foldl processD Empty . reverse $ ds
- 
+next :: Digits -> Digits
+next (Updated ds) = foldl processD Empty . reverse $ ds
+next dgts = dgts
+
 toNum :: Digits -> Maybe Int
 toNum Empty = Nothing
 toNum (Pending _) = Nothing
 toNum (Updated ns) = readMaybe $ ns >>= show
-
-nextIntDigits :: Int -> Digits
-nextIntDigits = getNewDigits . getDigits
