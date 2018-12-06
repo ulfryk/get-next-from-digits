@@ -1,5 +1,6 @@
 module NextFromDigits.Digits
-  ( digits
+  ( Digits(..) 
+  , digits
   , next
   , toNum
   ) where
@@ -7,10 +8,8 @@ module NextFromDigits.Digits
 import Data.Maybe
 import Text.Read
 
-data Digits
-  = Empty
-  | Pending [Int]
-  | Updated [Int]
+data Digits = Empty | Pending [Int] | Updated [Int]
+  deriving (Eq, Show)
 
 processD :: Digits -> Int -> Digits
 processD Empty n = Pending [n]

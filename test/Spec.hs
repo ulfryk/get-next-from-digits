@@ -1,6 +1,9 @@
 import Data.Maybe
 import Test.HUnit
+
 import NextFromDigits
+
+import Spec.NextFromDigits.Digits
 
 caseList = [
   (100100, Just 101000),
@@ -14,7 +17,11 @@ case2test :: (Int, Maybe Int) -> Test
 case2test (inp, exp) =
   ("(+++" ++ (show inp) ++ ")") ~: exp ~=? (getNextFromDigits inp) 
 
+testNextFromDigits = map case2test caseList
+
 main :: IO ()
 main = do
-  runTestTT $ test $ map case2test caseList
+  runTestTT $ test $ "Spec" ~: [ testNextFromDigits
+                               , digitsTest 
+                               ]
   return ()
