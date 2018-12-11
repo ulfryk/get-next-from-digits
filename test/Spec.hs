@@ -5,11 +5,10 @@ import Spec.Helpers.ProgressReporter
 import Spec.NextFromDigits
 import Spec.NextFromDigits.Digits
 
-specs = "Spec" ~: [ test_NextFromDigits
-                  , test_digits
-                  ]
-
 main :: IO ()
-main = do
-  runTestTTReport . test $ specs
-  return ()
+main = runTestTTReport . test $ "Spec " ~:
+  [ test_NextFromDigits
+  , test_digits
+  , test_toNum
+  , test_next
+  ]
