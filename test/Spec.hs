@@ -11,4 +11,6 @@ main = runTestTTReport . test $ "Spec " ~:
   , test_digits
   , test_toNum
   , test_next
+  , test_identity
+  , test_identity'
   ]
