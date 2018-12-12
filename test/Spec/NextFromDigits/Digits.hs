@@ -9,15 +9,8 @@ module Spec.NextFromDigits.Digits
 import Data.Maybe
 import Test.HUnit
 
+import Spec.Helpers.Assertions
 import NextFromDigits.Digits
-
-assertCase :: (Show a, Show b, Eq b) => String -> (a -> b) -> (a, b) -> Test
-assertCase label fn (inp, exp) = 
-  label ++ show inp ~: exp ~=? fn inp
-
-assertIdentityCase :: (Show a, Eq a) => String -> (a -> a) -> a -> Test
-assertIdentityCase label idFn e =
-  label ++ show e ~: e ~=? idFn e
 
 test_digits = map (assertCase "digits " digits) 
   [ (1, Updated [1])
