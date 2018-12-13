@@ -4,20 +4,18 @@ import Control.Concurrent
 import System.IO
 import Test.HUnit.Base (Test)
 import Test.HUnit.Text
+import Text.Printf
 
 reportMsg :: String -> Bool -> Int -> IO Int
 reportMsg m p l = do
-  putStr $ "\r#" ++ show (l + 1) ++ " [" ++ show p ++ "] msg: " ++ m
-  -- threadDelay 200000
+  printf "\r#%03d [%s] msg: %s" (l + 1) (show p) m 
   (hFlush stdout >> threadDelay 100000)
   return (l + 1)
 
-reporterPutText = PutText reportMsg 0
-
 runTestTTReport :: Test -> IO ()
 runTestTTReport t = do
-  (counts, l) <- runTestText reporterPutText t
-  putStrLn $ "\rDone 100% (" ++ show (l - 1) ++ ") specs.                                              "
+  (counts, l) <- runTestText (PutText reportMsg 0) t
+  printf "\rDone 100%% (%d) specs.                                              \n" (l - 1)
   putStrLn $ " "
   putStrLn $ showCounts counts
   return ()

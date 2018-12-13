@@ -38,7 +38,7 @@ test_next = map (assertCase "next " next)
   , (Updated [1, 2, 3, 4], Updated [1, 2, 4, 3])
   ]
 
-test_identity = map (assertIdentityCase "i " (\x -> (fmap digits x) >>= toNum))
+test_identity = map (assertIdentityCase "identity " (\x -> (fmap digits x) >>= toNum))
   [ Just 1
   , Just 123
   , Just 1000
@@ -46,8 +46,8 @@ test_identity = map (assertIdentityCase "i " (\x -> (fmap digits x) >>= toNum))
   ]
 
 test_identity' = map (assertIdentityCase "identity' " (\x -> fmap digits (x >>= toNum)))
- [ Just (Updated [1])
- , Just (Updated [1, 2, 3])
- , Just (Updated [1, 0, 0, 0])
- , Just (Updated [9, 9, 9, 9])
- ]
+  [ Just (Updated [1])
+  , Just (Updated [1, 2, 3])
+  , Just (Updated [1, 0, 0, 0])
+  , Just (Updated [9, 9, 9, 9])
+  ]
