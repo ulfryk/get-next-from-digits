@@ -2,20 +2,20 @@ module Spec.Helpers.ProgressReporter (runTestTTReport) where
 
 import Control.Concurrent
 import System.IO
-import Test.HUnit.Base (Test)
+import Test.HUnit.Base (Test, testCaseCount)
 import Test.HUnit.Text
 import Text.Printf
 
-reportMsg :: String -> Bool -> Int -> IO Int
-reportMsg m p l = do
-  printf "\r#%03d [%s] msg: %s" (l + 1) (show p) m 
+reportMsg :: Test -> String -> Bool -> Int -> IO Int
+reportMsg t _ _ l = do
+  printf "\r%03d / %03d (%03d%%)" l (testCaseCount t) (div (l * 100) (testCaseCount t))
   (hFlush stdout >> threadDelay 100000)
   return (l + 1)
 
 runTestTTReport :: Test -> IO ()
 runTestTTReport t = do
-  (counts, l) <- runTestText (PutText reportMsg 0) t
-  printf "\rDone 100%% (%d) specs.                                              \n" (l - 1)
-  putStrLn $ " "
+  putStrLn ""
+  (counts, l) <- runTestText (PutText (reportMsg t) 0) t
+  putStrLn "\n"
   putStrLn $ showCounts counts
   return ()
