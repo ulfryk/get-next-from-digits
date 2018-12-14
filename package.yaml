@@ -47,3 +47,4 @@ tests:
     dependencies:
     - get-next-from-digits
     - HUnit
+    - terminal-size
